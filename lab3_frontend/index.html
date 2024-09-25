@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="referenceGuideApp">
+<head>
+    <title>Справочник</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-controller="ConceptController">
+    <h1>Справочник</h1>
+    <select ng-model="selectedConcept" ng-options="concept.name for concept in concepts" ng-change="getDefinition()">
+        <option value="">Выберите понятие</option>
+    </select>
+    <div ng-if="definition">
+        <h2>{{ selectedConcept.name }}</h2>
+        <p>{{ definition }}</p>
+        <button ng-click="deleteConcept(selectedConcept.name)">Удалить понятие</button>
+    </div>
+
+    <h2>Добавить новое понятие</h2>
+    <form ng-submit="addConcept()">
+        <label>Название:</label>
+        <input type="text" ng-model="newConcept.name" required>
+        <label>Определение:</label>
+        <textarea ng-model="newConcept.definition" required></textarea>
+        <button type="submit">Добавить</button>
+    </form>
+</body>
+</html>
